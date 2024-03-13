@@ -31,15 +31,23 @@ public class MemberService {
     // 로그인을 처리하고, 로그인한 회원의 ID를 반환합니다.
     public Long login(String username, String password) {
         // TODO [1단계] username으로 회원을 찾아오고, 없으면 "존재하지 않는 아이디입니다" 메시지와 함께 UnAuthorizedException을 발생시키세요.
+        Member member = memberRepository.findByUsername(username)
+                .orElseThrow(() -> new UnAuthorizedException("존재하지 않는 아이디입니다."));
+
         // TODO [1단계] 찾아온 Member 인스턴스에 대해 password를 검증하세요.
+        member.login(password);
+
         // TODO [1단계] 검증이 성공적이면, 해당 회원의 ID를 반환하세요.
-        return null;
+        return member.getId();
     }
 
     // 회원 ID로 회원 정보를 조회하고, 그 결과를 MemberResponse로 반환합니다.
     public MemberResponse findById(Long memberId) {
         // TODO [1단계] memberId로 회원 정보를 찾아오고, 없으면 "회원 정보가 없습니다" 메시지와 함께 NotFoundException을 발생시키세요.
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new UnAuthorizedException("회원 정보가 없습니다."));
+
         // TODO [1단계] 찾아온 Member 인스턴스로부터 MemberResponse 객체를 생성하여 반환하세요.
-        return null;
+        return new MemberResponse(member);
     }
 }
