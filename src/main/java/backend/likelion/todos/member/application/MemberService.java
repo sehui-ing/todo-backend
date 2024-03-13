@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 // TODO [1단계] 이 클래스는 서비스 클래스입니다. 어떤 컴포넌트로 해야할까요?
 // TODO [1단계] 생성자를 알아서 만들어주는 어노테이션이 있습니다.
+@Service
+@RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
