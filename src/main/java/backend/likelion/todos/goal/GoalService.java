@@ -71,7 +71,7 @@ public class GoalService {
 
         // TODO [2단계] 조회된 목표 리스트를 GoalResponse 리스트로 변환하여 반환하세요.
         return goals.stream()
-                .map(GoalResponse::new)
+                .map(goal -> new GoalResponse(goal.getId(), goal.getName(), goal.getColor()))
                 .collect(Collectors.toList());
     }
 }
