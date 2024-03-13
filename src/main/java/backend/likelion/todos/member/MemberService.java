@@ -48,6 +48,6 @@ public class MemberService {
                 .orElseThrow(() -> new UnAuthorizedException("회원 정보가 없습니다."));
 
         // TODO [1단계] 찾아온 Member 인스턴스로부터 MemberResponse 객체를 생성하여 반환하세요.
-        return new MemberResponse(member);
+        return new MemberResponse(memberId, member.getUsername(), member.getNickname(), member.getProfileImageUrl());
     }
 }
