@@ -5,6 +5,7 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import backend.likelion.todos.common.UnAuthorizedException;
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import java.util.Date;
@@ -25,14 +26,23 @@ public class JwtService {
     // 회원 ID를 기반으로 JWT 토큰을 생성합니다.
     public String createToken(Long memberId) {
         // TODO [5단계] 현재 시간과 설정된 만료 시간을 사용하여 만료 날짜를 설정하세요.
+        // 선택 1번: endDate
         Date currentDate = new Date();
-        Date endDate = new Date(currentDate.getTime() + accessTokenExpirationDayToMills);
+        Date endDate = new Date(accessTokenExpirationDayToMills + currentDate.getTime());
+
+        // 선택 2번: expirationDate
+        Date expirationDate = new Date(accessTokenExpirationDayToMills + System.currentTimeMillis());
 
         // TODO [5단계] memberId를 클레임으로 추가하세요.
-        String token = ??
-
         // TODO [5단계] 설정된 알고리즘으로 토큰을 서명하고 반환하세요.
-        return token;
+        JWT jwt1 = new JWT();
+        JWT jwt2 = new JWT();
+
+        // 어느 것을 선택 ..?
+        jwt1.create().withExpiresAt(endDate).withClaim("memberId", memberId).sign(algorithm);
+        jwt2.create().withExpiresAt(expirationDate).withClaim("memberId", memberId).sign(algorithm);
+
+        return null;
     }
 
     // 토큰에서 회원 ID를 추출합니다.
