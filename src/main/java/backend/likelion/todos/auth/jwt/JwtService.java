@@ -38,7 +38,6 @@ public class JwtService {
         // TODO [5단계] 알고리즘을 사용해 토큰의 유효성을 검증하고,
         // "memberId" 클레임에서 회원 ID를 추출하세요.
         // 유효하지 않은 경우 "유효하지 않은 토큰입니다." 메시지와 함께 UnAuthorizedException을 발생시키세요.
-
 //        if (??) {
 //            ??
 //        } else {
@@ -47,6 +46,9 @@ public class JwtService {
 
         try {
             return JWT.require(algorithm)
+                    .withIssuer("auth0")
+                    .build()
+                    .verify(token)
                     .getClaim("memberId")
                     .asLong();
         } catch (JWTVerificationException e) {
