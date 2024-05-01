@@ -29,7 +29,8 @@ public class TodoController {
             @RequestBody TodoCreateRequest request
     ) {
         // TODO [9단계] TodoCreateRequest에서 goalId, content, date를 추출하여 todoService의 save 메소드를 호출하고, 생성된 Todo의 ID로 URI를 생성하여 ResponseEntity를 반환하세요.
-        return null;
+        Long savedUriSring = todoService.save(request.goalId(), memberId, request.content(), request.date());
+        return ResponseEntity.created(URI.create("/todos/" + savedUriSring)).build();
     }
 
     @PostMapping("/{id}/check")
