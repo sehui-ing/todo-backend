@@ -39,6 +39,7 @@ public class TodoController {
             @PathVariable("id") Long todoId
     ) {
         // TODO [9단계] todoId와 memberId를 todoService의 check 메소드에 전달하여 Todo를 완료 상태로 변경하세요.
+        todoService.check(todoId, memberId);
     }
 
     @PostMapping("/{id}/uncheck")
@@ -47,6 +48,7 @@ public class TodoController {
             @PathVariable("id") Long todoId
     ) {
         // TODO [9단계] todoId와 memberId를 todoService의 uncheck 메소드에 전달하여 Todo를 미완료 상태로 변경하세요.
+        todoService.uncheck(todoId, memberId);
     }
 
     @PutMapping("/{id}")
@@ -56,6 +58,7 @@ public class TodoController {
             @RequestBody TodoUpdateRequest request
     ) {
         // TODO [9단계] TodoUpdateRequest에서 content, date를 추출하고, todoId와 memberId를 함께 todoService의 update 메소드에 전달하여 Todo 정보를 업데이트하세요.
+        todoService.update(todoId, memberId, request.content(), request.date());
     }
 
     @DeleteMapping("/{id}")
@@ -64,6 +67,7 @@ public class TodoController {
             @PathVariable("id") Long todoId
     ) {
         // TODO [9단계] todoId와 memberId를 todoService의 delete 메소드에 전달하여 Todo를 삭제하세요.
+        todoService.delete(todoId, memberId);
     }
 
     @GetMapping("/my")
