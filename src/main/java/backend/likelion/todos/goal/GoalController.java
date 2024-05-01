@@ -26,8 +26,9 @@ public class GoalController {
             @Auth Long memberId,
             @RequestBody GoalCreateRequest request
     ) {
+        String uriString = "/goals/" + goalService.save(request.name(), request.color(), memberId);
         // TODO [8단계] GoalCreateRequest에서 이름과 색상을 추출하여 goalService의 save 메소드를 호출하고, 생성된 Goal의 ID로 URI를 생성하여 ResponseEntity를 반환하세요.
-        return null;
+        return ResponseEntity.created(URI.create(uriString)).build();
     }
 
     @PutMapping("/{id}")
@@ -36,8 +37,9 @@ public class GoalController {
             @Auth Long memberId,
             @RequestBody GoalUpdateRequest request
     ) {
+        goalService.update(id, request.name(), request.color(), memberId);
         // TODO [8단계] GoalUpdateRequest에서 이름과 색상을 추출하고, id와 memberId를 함께 goalService의 update 메소드에 전달하여 Goal 정보를 업데이트한 후, ResponseEntity.ok()를 반환하세요.
-        return null;
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
@@ -45,8 +47,9 @@ public class GoalController {
             @PathVariable("id") Long id,
             @Auth Long memberId
     ) {
+        goalService.delete(id, memberId);
         // TODO [8단계] id와 memberId를 goalService의 delete 메소드에 전달하여 Goal을 삭제하고, ResponseEntity.ok()를 반환하세요.
-        return null;
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/my")
@@ -54,6 +57,6 @@ public class GoalController {
             @Auth Long memberId
     ) {
         // TODO [8단계] memberId를 goalService의 findAllByMemberId 메소드에 전달하여 해당 회원의 모든 Goal 정보를 조회하고, 조회된 정보를 ResponseEntity.ok()에 담아 반환하세요.
-        return null;
+        return ResponseEntity.ok(goalService.findAllByMemberId(memberId));
     }
 }
