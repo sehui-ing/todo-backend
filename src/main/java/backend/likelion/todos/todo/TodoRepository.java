@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TodoRepository {
+public interface TodoRepository extends JpaRepository<Todo, Long> {
     // TODO [10단계] JpaRepository를 상속받습니다.
 
     /**
